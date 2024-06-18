@@ -134,6 +134,7 @@ dist
 images/Items/
 images/Maps/
 images/Spells/
+images/Resources/
 images/*.zip
 # All the json config files
 config/

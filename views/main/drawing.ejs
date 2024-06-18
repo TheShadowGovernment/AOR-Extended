@@ -3,10 +3,17 @@
 <head>
     <title>A Youtube Video ( ͡° ͜ʖ ͡°)</title>
     <style>
-        body {
-            background-color: #121317;
+        html, body {
+            height: 100%;
+            width: 100%;
+            margin: 0;
+            padding: 0;
+            background-color: transparent !important;
+            overflow: hidden;
         }
-
+        #content {
+            background-color: transparent;
+        }
         /* Position the canvases */
         #mapCanvas, #gridCanvas, #ourPlayerCanvas, #drawCanvas, #nametagRangeCanvas {
             position: absolute;
@@ -21,12 +28,12 @@
 
         #rightCanvas {
             position: absolute;
-            top: 0;
-            left: 520px; /* Position to the right of mapCanvas which is 500px wide plus margin */
+            top: 520px;
+            left: 0px; /* Position to the right of mapCanvas which is 500px wide plus margin */
             margin: 10px;
             width: 500px;
             height: 500px;
-            overflow-y: auto; /* Add vertical scroll if content overflows */
+            overflow-y: hidden; /* Add vertical scroll if content overflows */
             overflow-x: hidden; /* Prevent horizontal scroll */
         }
 
@@ -38,38 +45,38 @@
 
         #controlsContainer {
             position: absolute;
-            top: 520px;
-            left: 0;
+            top: 0px;
+            left: 520px;
             background-color: #1a1c23;
             color: white;
             margin: 10px;
             border: 1px solid gray;
             padding: 10px;
             cursor: pointer;
-            display: flex;
-            justify-content: space-between;
-        }
-
-        #buttonContainer {
-            display: flex;
-            flex-wrap: wrap;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-gap: 10px;
+            width: 500px;
+            height: 300px;
+            box-sizing: border-box;
         }
 
         .control-button {
-            margin: 3px;
+            margin: 0;
             background-color: #1a1c23;
             color: white;
             border: 1px solid gray;
-            padding: 2px 4px; /* Reduced padding */
+            padding: 5px;
             cursor: pointer;
-            font-size: 12px; /* Decreased font size */
-            flex: 1 1 calc(33.3% - 6px); /* Adjusted flex to fit three buttons per row */
-            box-sizing: border-box;
+            font-size: 12px;
+            text-align: center;
         }
 
         #volumeContainer {
             display: flex;
             flex-direction: column;
+            grid-column: span 3;
+            align-items: center;
         }
 
         #volumeLabel, #volumeSlider, #playerVolumeLabel, #playerVolumeSlider, #announcerVolumeLabel, #announcerVolumeSlider {
@@ -93,21 +100,20 @@
         <canvas id="drawCanvas" width="500" height="500"></canvas>
         <canvas id="nametagRangeCanvas" width="500" height="500"></canvas> <!-- New canvas for nametag range -->
         <div id="controlsContainer">
-            <div id="buttonContainer">
-                <button id="button" class="control-button">Clear the Radar</button>
-                <button id="logEnemiesList" class="control-button">Log Enemies List</button>
-                <button id="sonarButton" class="control-button">Enable Sonar</button>
-                <button id="announcerButton" class="control-button">Enable Player Direction Announcer</button>
-                <button id="showNametagRangeButton" class="control-button">Show Nametag Range</button>
-                <button id="toggleGridButton" class="control-button">Disable Grid</button>
-            </div>
+            <button id="button" class="control-button">Clear the Radar</button>
+            <button id="logEnemiesList" class="control-button">Log Enemies List</button>
+            <button id="sonarButton" class="control-button">Enable Sonar</button>
+            <button id="announcerButton" class="control-button">Enable Player Direction Announcer</button>
+            <button id="showNametagRangeButton" class="control-button">Show Nametag Range</button>
+            <button id="toggleGridButton" class="control-button">Disable Grid</button>
+            <button id="switchPositionButton" class="control-button">Switch Position</button>
             <div id="volumeContainer">
                 <label id="volumeLabel" for="volumeSlider">Sonar Volume:</label>
                 <input type="range" id="volumeSlider" min="0" max="100" value="2">
                 <label id="playerVolumeLabel" for="playerVolumeSlider">Player Detected Volume:</label>
-                <input type="range" id="playerVolumeSlider" min="0" max="100" value="50">
+                <input type="range" id="playerVolumeSlider" min="0" max="100" value="3">
                 <label id="announcerVolumeLabel" for="announcerVolumeSlider">Announcer Volume:</label>
-                <input type="range" id="announcerVolumeSlider" min="0" max="100" value="50"> <!-- New volume slider -->
+                <input type="range" id="announcerVolumeSlider" min="0" max="100" value="3"> <!-- New volume slider -->
             </div>
         </div>
     </div>
@@ -128,6 +134,7 @@
             let nametagRangeEnabled = false;
             const nametagRangeCanvas = document.getElementById('nametagRangeCanvas');
             const nametagRangeContext = nametagRangeCanvas.getContext('2d');
+            let controlsAtBottom = true;
 
             $('#showNametagRangeButton').click(function() {
                 nametagRangeEnabled = !nametagRangeEnabled;
@@ -167,6 +174,18 @@
                 } else {
                     drawingUtils.clearGrid(gridContext, gridCanvas);
                     $('#toggleGridButton').text('Enable Grid');
+                }
+            });
+
+            // Switch position button click handler
+            $('#switchPositionButton').click(function() {
+                controlsAtBottom = !controlsAtBottom;
+                if (controlsAtBottom) {
+                    $('#controlsContainer').css({ 'top': '520px', 'left': '0' });
+                    $('#rightCanvas').css({ 'top': '0', 'left': '520px' });
+                } else {
+                    $('#controlsContainer').css({ 'top': '0', 'left': '520px' });
+                    $('#rightCanvas').css({ 'top': '520px', 'left': '0' });
                 }
             });
         });
