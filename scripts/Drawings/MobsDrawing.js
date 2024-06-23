@@ -54,7 +54,7 @@ export class MobsDrawing extends DrawingUtils {
         drawId = this.settings.livingResourcesID;
       } else if (
         mobOne.type >= EnemyType.Enemy &&
-        mobOne.type <= EnemyType.Events
+        mobOne.type <= EnemyType.AvalonBoss
       ) {
         imageName = mobOne.name;
       }

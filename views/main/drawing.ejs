@@ -1,7 +1,6 @@
-<!DOCTYPE html>
 <html>
 <head>
-    <title>A Youtube Video ( ͡° ͜ʖ ͡°)</title>
+    <title>Radar</title>
     <style>
         body {
             background-color: #121317;
@@ -72,7 +71,7 @@
             align-items: center;
         }
 
-        #volumeLabel, #volumeSlider, #playerVolumeLabel, #playerVolumeSlider, #announcerVolumeLabel, #announcerVolumeSlider {
+        #playerVolumeLabel, #playerVolumeSlider {
             margin: 5px;
             font-size: 14px;
         }
@@ -94,19 +93,12 @@
         <canvas id="nametagRangeCanvas" width="500" height="500"></canvas> <!-- New canvas for nametag range -->
         <div id="controlsContainer">
             <button id="button" class="control-button">Clear the Radar</button>
-            <button id="logEnemiesList" class="control-button">Log Enemies List</button>
-            <button id="sonarButton" class="control-button">Enable Sonar</button>
-            <button id="announcerButton" class="control-button">Enable Player Direction Announcer</button>
             <button id="showNametagRangeButton" class="control-button">Show Nametag Range</button>
             <button id="toggleGridButton" class="control-button">Disable Grid</button>
             <button id="switchPositionButton" class="control-button">Switch Position</button>
             <div id="volumeContainer">
-                <label id="volumeLabel" for="volumeSlider">Sonar Volume:</label>
-                <input type="range" id="volumeSlider" min="0" max="100" value="2">
                 <label id="playerVolumeLabel" for="playerVolumeSlider">Player Detected Volume:</label>
-                <input type="range" id="playerVolumeSlider" min="0" max="100" value="50">
-                <label id="announcerVolumeLabel" for="announcerVolumeSlider">Announcer Volume:</label>
-                <input type="range" id="announcerVolumeSlider" min="0" max="100" value="50"> <!-- New volume slider -->
+                <input type="range" id="playerVolumeSlider" min="0" max="100" value="5">
             </div>
         </div>
     </div>
