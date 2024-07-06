@@ -1,4 +1,4 @@
-How to run it:
+How to run Electron version:
 - run `cmd`
 - use `npm start`
 - ?????
