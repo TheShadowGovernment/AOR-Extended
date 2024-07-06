@@ -1,7 +1,8 @@
-How to run it
-run `cmd`
-use `npm start`
-it's working 
+How to run it:
+- run `cmd`
+- use `npm start`
+- ?????
+- profit
 
 
 ## ❓ Fixes and changes:
