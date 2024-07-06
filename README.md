@@ -1,3 +1,9 @@
+How to run it
+run `cmd`
+use `npm start`
+it's working 
+
+
 ## ❓ Fixes and changes:
 
 - Fixed wisp cages not being deleted when out of range.
